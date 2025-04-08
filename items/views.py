@@ -45,6 +45,9 @@ def get_category_en(request):
     }
     return render(request, 'base_en.html', context)
 
+def qwer():
+    return 1 - 1
+
 
 
 
