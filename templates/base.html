@@ -1,0 +1,234 @@
+{% load static %}
+{% load solo_tags %}
+{% get_solo "common.Contacts" as contacts %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{% load costom_filters %}
+    <header>
+        <div class="header_buttons">
+            <div class="logo">Интернет-магазин</div>
+            <button class="lang-button">
+                <a href="http://127.0.0.1:8000/en">EN</a>
+            </button>
+        </div>
+    </header>
+<nav>
+    <div class="header_buttons">
+        <button class="mobile-menu-btn">☰</button>
+        <ul class="menu">
+            {% for category in categories %}
+            <li class="menu-item">
+                <a href="#">{{ category.name_ru }}</a>
+                <ul class="submenu">
+                {% for sub_category in sub_categories|get_item:category.id %}
+                    <li><a href="#">{{sub_category.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+
+    <main class="container">
+        <h1 class="page-title">Популярные товары</h1>
+
+        <div class="product-grid">
+            <div class="product-card">
+                {% for item in items %}
+                        <div class="product-image">
+                              {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="{{ item.title_ru }}">
+                              {% else %}
+                                <img src="/static/images/placeholder.jpg" alt="Нет изображения">
+                              {% endif %}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">{{ item.title_ru }}</h3>
+                            <div class="price-block">
+                            <span class="old-price">34 999 ₽</span>
+                        <span class="product-price">{{ item.price }}</span>
+                        </div>
+                            <button class="product-button">В корзину</button>
+                        </div>
+                {% endfor %}
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 2">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Ноутбук Модель Y</h3>
+                    <div class="price-block">
+                        <span class="old-price">65 999 ₽</span>
+                        <span class="product-price">59 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 3">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Наушники Модель Z</h3>
+                    <div class="price-block">
+                        <span class="old-price">7 999 ₽</span>
+                        <span class="product-price">5 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 4">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Умные часы Модель A</h3>
+                    <div class="price-block">
+                        <span class="old-price">15 999 ₽</span>
+                        <span class="product-price">12 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 5">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Телевизор Модель B</h3>
+                    <div class="price-block">
+                        <span class="old-price">52 999 ₽</span>
+                        <span class="product-price">45 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 6">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Планшет Модель C</h3>
+                    <div class="price-block">
+                        <span class="old-price">29 999 ₽</span>
+                        <span class="product-price">24 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 7">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Фотокамера Модель D</h3>
+                    <div class="price-block">
+                        <span class="old-price">42 999 ₽</span>
+                        <span class="product-price">35 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+
+            <!-- Товар 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/api/placeholder/200/200" alt="Товар 8">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Колонка Модель E</h3>
+                    <div class="price-block">
+                        <span class="old-price">9 999 ₽</span>
+                        <span class="product-price">7 999 ₽</span>
+                    </div>
+                    <button class="product-button">В корзину</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Contacts</h3>
+                    <ul class="footer-contacts">
+                        <li><span class="icon">📱</span> {{ contacts.phone }}</li>
+                        <li><span class="icon">✉️</span> {{ contacts.email }}</li>
+                        <li><span class="icon">🏢</span> {{ contacts.address }}</li>
+                        <li><span class="icon">🕑</span>{{ contacts.working_hours }}</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия и возврат</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Публичная оферта</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Подпишитесь на новости</h3>
+                    <p>Получайте первыми информацию о новинках и акциях</p>
+                    <form class="subscription-form">
+                        <input type="email" placeholder="Ваш email" class="subscription-input" required>
+                        <button type="submit" class="subscription-button">OK</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#" title="ВКонтакте">VK</a>
+                        <a href="#" title="Telegram">TG</a>
+                        <a href="#" title="WhatsApp">WA</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Интернет-магазин. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+
+        // Для мобильной версии добавляем клик на категории
+        document.querySelectorAll('.menu-item > a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.parentNode.classList.toggle('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

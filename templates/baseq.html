@@ -1,0 +1,194 @@
+
+{% load static %}
+{% load solo_tags %}
+{% get_solo "common.Contacts" as contacts %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="{% static 'css/styles.css' %}">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>SOFTEC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header, nav, section, footer {
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            background: #007BFF;
+            color: #fff;
+        }
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            background: #333;
+            color: #fff;
+        }
+
+        /* Стили для каталога */
+        .category {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            border-left: 4px solid #007BFF;
+            position: relative;
+        }
+        .category h3 {
+            margin: 0;
+            padding: 5px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+        .category:hover {
+            background: #d8e8f8;
+        }
+
+        .subcategories {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            min-width: 250px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 10px;
+        }
+        .category:hover .subcategories {
+            display: block;
+        }
+
+        .subcategory {
+            padding: 8px;
+            margin: 5px 0;
+            position: relative;
+        }
+        .subcategory:hover {
+            background: #f5f5f5;
+        }
+
+        .items {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            min-width: 300px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 10px;
+        }
+        .subcategory:hover .items {
+            display: block;
+        }
+
+        .item {
+            padding: 10px;
+            margin: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SOFTECH.KG</h1>
+        <p>Добро пожаловать в наш интернет-магазин!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">О компании</a></li>
+            <li><a href="#catalog">Каталог товаров</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#privacy">Политика конфиденциальности</a></li>
+        </ul>
+    </nav>
+    <section id="about">
+        <h2>О компании</h2>
+        <p>Интернет-магазин SOFTECH.KG предлагает широкий ассортимент электроники и аксессуаров по доступным ценам.</p>
+    </section>
+    <section id="catalog">
+        <h2>Каталог товаров</h2>
+        <p>В нашем каталоге представлены смартфоны, аксессуары и другие гаджеты от ведущих производителей.</p>
+
+        <div class="categories-container">
+            {% for category in categories %}
+            <div class="category">
+                <h3>{{ category.name }}</h3>
+                <div class="subcategories">
+                    {% for subcategory in subcategories %}
+                        {% if subcategory.category == category %}
+                        <div class="subcategory">
+                            {{ subcategory.name }}
+                            <div class="items">
+                                {% for item in subcategory.items.all %}
+                                <div class="item">
+                                    <h4>{{ item.name_en }}</h4>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Контакты</h2>
+        <p>Компания: {{ contacts.company_name }}</p>
+        <p>Адрес: {{ contacts.address }}</p>
+        <p>Телефон: {{ contacts.phone }}</p>
+        <p>Email: {{ contacts.email }}</p>
+        <p>Режим работы: {{ contacts.working_hours }}</p>
+        <hr>
+        <p>Свяжитесь с нами по телефону или электронной почте для получения дополнительной информации.</p>
+    </section>
+    <section id="privacy">
+        <h2>Политика конфиденциальности</h2>
+        <p>Мы уделяем большое значение охране предоставленных вами данных и обязуемся сохранять вашу конфиденциальность в Интернете.</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 SOFTECH.KG. Все права защищены.</p>
+    </footer>
+</body>
+</html>
